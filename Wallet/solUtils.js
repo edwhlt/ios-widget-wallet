@@ -18,17 +18,18 @@ export const getTokenSolUsdBalance = async (rpcUrl, addr) => {
   req.body = JSON.stringify(payload);
 
   const res = await req.loadJSON();
+  log(`[DEBUG] Number of token accounts found: ${res?.result?.value?.length || 0}`);
 
   let result = [];
 
-  if (res.result && res.result.value) {
+  if (res?.result && res?.result?.value) {
     for (const tokenAccount of res.result.value) {
       const info = tokenAccount.account.data.parsed.info;
       const mint = info.mint;
       const amount = info.tokenAmount.uiAmount;
       const decimals = info.tokenAmount.decimals;
       const symbol = config().SOL_TOKEN_SYMBOL[mint];
-      log(`[SOL] ${mint}: ${symbol}`);
+      log(`[DEBUG] Mint ${mint}: ${symbol}`);
 
       if (!symbol || amount === 0) continue;
 
@@ -41,8 +42,8 @@ export const getTokenSolUsdBalance = async (rpcUrl, addr) => {
   
       let priceRes = await priceReq.loadJSON();
       let priceUSD = priceRes.data[symbol].quote.USD.price;
-	  
-	  log(`[SOL] ${symbol}: ${priceUSD} USD`)
+
+      log(`[DEBUG] ${symbol}: ${priceUSD} USD`);
 
       result.push({
         mint,
