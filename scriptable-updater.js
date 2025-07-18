@@ -14,10 +14,10 @@ async function downloadLatestWidget() {
     let releaseReq = new Request(releaseUrl);
     let release = await releaseReq.loadJSON();
     
-    // 2. Trouver l'asset du widget
-    let asset = release.assets.find(a => a.name === "wallet-widget.js");
+    // 2. Trouver l'asset du widget (chercher "Wallet Widget.js")
+    let asset = release.assets.find(a => a.name === "Wallet Widget.js");
     if (!asset) {
-      throw new Error("Fichier wallet-widget.js non trouvé dans la release");
+      throw new Error("Fichier 'Wallet Widget.js' non trouvé dans la release");
     }
     
     // 3. Télécharger le fichier

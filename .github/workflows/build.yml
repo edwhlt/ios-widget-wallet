@@ -8,10 +8,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node.js
         uses: actions/setup-node@v4
@@ -22,7 +24,7 @@ jobs:
         run: npm install
 
       - name: Build bundle
-        run: npx rollup -c
+        run: npm run build
 
       - name: Upload bundle as artifact
         uses: actions/upload-artifact@v4
@@ -30,24 +32,15 @@ jobs:
           name: scriptable-bundle
           path: dist/Wallet Widget.js
 
-      - name: Create Release
+      - name: Create Release with Asset
         if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          files: |
+            dist/Wallet Widget.js
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
           draft: false
           prerelease: false
-
-      - name: Upload Release Asset
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/Wallet Widget.js
-          asset_name: wallet-widget.js
-          asset_content_type: application/javascript
