@@ -28,9 +28,8 @@ export const getTokenSolUsdBalance = async (rpcUrl, addr) => {
       const amount = info.tokenAmount.uiAmount;
       const decimals = info.tokenAmount.decimals;
       const symbol = config().SOL_TOKEN_SYMBOL[mint];
-	  
-	log(`[SOL] ${mint}: ${symbol}`)
-      
+      log(`[SOL] ${mint}: ${symbol}`);
+
       if (!symbol || amount === 0) continue;
 
       let priceReq = new Request(`https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=${symbol}`);

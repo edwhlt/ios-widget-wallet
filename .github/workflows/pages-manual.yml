@@ -1,11 +1,10 @@
-name: Deploy to GitHub Pages
+name: Enable GitHub Pages (Manual)
 
 on:
-  push:
-    branches: [ main ]
+  workflow_dispatch: # Déclenchement manuel uniquement
 
 jobs:
-  deploy:
+  setup-pages:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -38,3 +37,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Success message
+        run: |
+          echo "✅ GitHub Pages deployed successfully!"
+          echo "Your widget will be available at:"
+          echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/Wallet%20Widget.js"

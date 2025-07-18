@@ -15,7 +15,6 @@ export const loadConfig = async () => {
     await fm.downloadFileFromiCloud(filePath);
     const content = fm.readString(filePath);
     cachedConfig = JSON.parse(content);
-    log(`Config loaded: ${JSON.stringify(cachedConfig)}`);
     return cachedConfig;
   } catch (error) {
     log(`[ERROR] Configuration: ${error.message}`);
