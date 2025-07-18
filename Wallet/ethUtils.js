@@ -1,6 +1,3 @@
-// Variables used by Scriptable.
-// These must be at the very top of the file. Do not edit.
-// icon-color: teal; icon-glyph: magic;
 export const getETHBalance = async (rpcUrl, addr) => {
   let payload = {
     jsonrpc: "2.0",

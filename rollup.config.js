@@ -3,7 +3,10 @@ export default {
   output: {
     file: 'dist/Wallet Widget.js',
     format: 'iife', // IIFE = format que Scriptable peut exécuter directement
-    name: 'WalletWidget'
+    name: 'WalletWidget',
+    banner: `// Variables used by Scriptable.
+// These must be at the very top of the file. Do not edit.
+// icon-color: deep-purple; icon-glyph: dollar-sign;`
   },
   // Pas d'external pour inclure tous les modules locaux
   onwarn: (warning, warn) => {

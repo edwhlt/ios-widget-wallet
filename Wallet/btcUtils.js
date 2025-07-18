@@ -1,6 +1,3 @@
-// Variables used by Scriptable.
-// These must be at the very top of the file. Do not edit.
-// icon-color: deep-brown; icon-glyph: magic;
 export const getBTCBalance = async (addr) => {
   let url = `https://blockstream.info/api/address/${addr}`;
   let req = new Request(url);
