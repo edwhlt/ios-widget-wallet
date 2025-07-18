@@ -1,7 +1,7 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: teal; icon-glyph: magic;
-const getETHBalance = async (rpcUrl, addr) => {
+export const getETHBalance = async (rpcUrl, addr) => {
   let payload = {
     jsonrpc: "2.0",
     method: "eth_getBalance",
@@ -15,8 +15,4 @@ const getETHBalance = async (rpcUrl, addr) => {
   let res = await req.loadJSON();
   let wei = res.result;
   return parseInt(wei, 16) / 1e18;
-}
-
-module.exports = {
-  getETHBalance
 }

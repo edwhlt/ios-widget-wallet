@@ -1,9 +1,9 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: orange; icon-glyph: magic;
-const { config } = importModule(`Wallet/config`);
+import { config } from "./config.js";
 
-const getTokenSolUsdBalance = async (rpcUrl, addr) => {
+export const getTokenSolUsdBalance = async (rpcUrl, addr) => {
   const payload = {
     jsonrpc: "2.0",
     id: 1,
@@ -57,8 +57,4 @@ const getTokenSolUsdBalance = async (rpcUrl, addr) => {
   }
 
   return result.reduce((sum, item) => sum + item.amount, 0);
-}
-
-module.exports = {
-  getTokenSolUsdBalance
 }

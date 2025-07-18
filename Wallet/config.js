@@ -1,8 +1,8 @@
 const fm = FileManager.iCloud();
-const filePath = fm.joinPath(fm.documentsDirectory(), "Wallet/config.json");
+const filePath = fm.joinPath(fm.documentsDirectory(), "config.json");
 let cachedConfig; // variable privée pour stocker la config chargée
 
-const loadConfig = async () => {
+export const loadConfig = async () => {
   if (cachedConfig) return cachedConfig;
   // Sinon, charger la config depuis le fichier
   await fm.downloadFileFromiCloud(filePath);
@@ -12,7 +12,4 @@ const loadConfig = async () => {
   return cachedConfig;
 }
 
-module.exports = {
-	config: () => cachedConfig,
-	loadConfig
-}
+export const config = () => cachedConfig;

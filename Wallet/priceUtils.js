@@ -1,9 +1,9 @@
 // Variables used by Scriptable.
 // These must be at the very top of the file. Do not edit.
 // icon-color: brown; icon-glyph: magic;
-const { config } = importModule(`Wallet/config`);
+import { config } from "./config.js";
 
-const getPrices = async () => {
+export const getPrices = async () => {
   let url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC,ETH,SOL&convert=USD";
   let req = new Request(url);
   req.headers = {
@@ -25,7 +25,7 @@ const getPrices = async () => {
 }
 
 // Prix historiques BTC et ETH (à J-7)
-const getPrices7DaysAgo = async () => {
+export const getPrices7DaysAgo = async () => {
   let ts = Math.floor((Date.now() - 7 * 24 * 3600 * 1000) / 1000);
 
   let urlBTC = `https://min-api.cryptocompare.com/data/pricehistorical?fsym=BTC&tsyms=USD&ts=${ts}`;
@@ -45,9 +45,4 @@ const getPrices7DaysAgo = async () => {
     ethEur7d: resETH.ETH.USD,
     solEur7d: resSol.SOL.USD
   };
-}
-
-module.exports = {
-  getPrices,
-  getPrices7DaysAgo
 }
