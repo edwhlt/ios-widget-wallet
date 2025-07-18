@@ -2,7 +2,7 @@ export default {
   input: 'main.js',
   output: {
     file: 'dist/Wallet Widget.js',
-    format: 'es', // IIFE = format que Scriptable peut exécuter directement
+    format: 'iife', // IIFE = format que Scriptable peut exécuter directement
     name: 'WalletWidget'
   },
   // Pas d'external pour inclure tous les modules locaux
